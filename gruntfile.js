@@ -7,33 +7,29 @@ module.exports = function (grunt) {
 		browserify: {
 			dev: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.jsx']
+					'build/app.js': ['source/scripts/app/main.js']
 				},
 				options: {
-					alias: {
-						'react': './source/scripts/libs/react'
-					},
 					transform: [
 						'babelify', 'reactify'
 					],
 					browserifyOptions: {
 						extensions: ['.jsx'],
-					}
+						debug: true,
+					},
 				},
 			},
 			devWatch: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.jsx']
+					'build/app.js': ['source/scripts/app/main.js']
 				},
 				options: {
-					alias: {
-						'react': './source/scripts/libs/react'
-					},
 					transform: [
 						'babelify', 'reactify'
 					],
 					browserifyOptions: {
 						extensions: ['.jsx'],
+						debug: true,
 					},
 					keepAlive: true,
 					watch: true
@@ -110,7 +106,7 @@ module.exports = function (grunt) {
 	
 	grunt.registerTask('scripts_dev', ['browserify:dev']);
 
-	grunt.registerTask('watcher', ['concurrent:dev'])
+	grunt.registerTask('watch-all', ['concurrent:dev'])
 
 	grunt.registerTask('default', ['eslint', 'clean:build', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
 };
