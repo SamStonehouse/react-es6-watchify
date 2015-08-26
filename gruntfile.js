@@ -11,7 +11,8 @@ module.exports = function (grunt) {
 				},
 				options: {
 					alias: {
-						'react': './source/scripts/libs/react'
+						'react': './source/scripts/libs/react',
+						'alt': './source/scripts/libs/alt',
 					},
 					transform: [
 						'babelify', 'reactify'
@@ -27,7 +28,9 @@ module.exports = function (grunt) {
 				},
 				options: {
 					alias: {
-						'react': './source/scripts/libs/react'
+						'react': './source/scripts/libs/react',
+						'alt': './source/scripts/libs/alt',
+						
 					},
 					transform: [
 						'babelify', 'reactify'
@@ -110,7 +113,7 @@ module.exports = function (grunt) {
 	
 	grunt.registerTask('scripts_dev', ['browserify:dev']);
 
-	grunt.registerTask('watcher', ['concurrent:dev'])
+	grunt.registerTask('watch-all', ['concurrent:dev'])
 
 	grunt.registerTask('default', ['eslint', 'clean:build', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
 };
