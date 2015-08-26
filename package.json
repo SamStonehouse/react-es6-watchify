@@ -4,7 +4,6 @@
   "description": "An introduction to creating a react component with grunt, browserify and es6 via babel",
   "author": "Sam Stonehouse",
   "devDependencies": {
-    "babelify": "^6.2.0",
     "browserify": "^11.0.1",
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.0",
