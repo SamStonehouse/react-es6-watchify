@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		clean: {
+			build: 	["build/"],
+		},
 		browserify: {
 			dev: {
 				files: {
@@ -97,6 +100,7 @@ module.exports = function (grunt) {
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-targethtml');
 	grunt.loadNpmTasks('grunt-sass');
@@ -108,5 +112,5 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('watcher', ['concurrent:dev'])
 
-	grunt.registerTask('default', ['scripts_dev', 'targethtml:dev', 'sass:dev']);
+	grunt.registerTask('default', ['eslint', 'clean:build', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
 };

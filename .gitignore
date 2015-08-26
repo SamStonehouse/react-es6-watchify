@@ -3,4 +3,4 @@
 /node_modules
 
 # Vim temp files
-.swp
+*.swp
