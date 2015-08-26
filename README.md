@@ -11,6 +11,10 @@ Intially you will have to install all NPM modules
 
     npm install
     
+You'll also need grunt-cli for running grunt from the command line
+
+    npm install -g grunt-cli
+
 The default grunt task will build everything
 
     grunt

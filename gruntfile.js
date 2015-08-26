@@ -7,36 +7,29 @@ module.exports = function (grunt) {
 		browserify: {
 			dev: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.jsx']
+					'build/app.js': ['source/scripts/app/main.js']
 				},
 				options: {
-					alias: {
-						'react': './source/scripts/libs/react',
-						'alt': './source/scripts/libs/alt',
-					},
 					transform: [
 						'babelify', 'reactify'
 					],
 					browserifyOptions: {
 						extensions: ['.jsx'],
-					}
+						debug: true,
+					},
 				},
 			},
 			devWatch: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.jsx']
+					'build/app.js': ['source/scripts/app/main.js']
 				},
 				options: {
-					alias: {
-						'react': './source/scripts/libs/react',
-						'alt': './source/scripts/libs/alt',
-						
-					},
 					transform: [
 						'babelify', 'reactify'
 					],
 					browserifyOptions: {
 						extensions: ['.jsx'],
+						debug: true,
 					},
 					keepAlive: true,
 					watch: true
