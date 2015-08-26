@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 		browserify: {
 			dev: {
 				files: {
-					'build/app.js': ['source/scripts/main.jsx']
+					'build/app.js': ['source/scripts/app/main.jsx']
 				},
 				options: {
 					alias: {
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 			},
 			devWatch: {
 				files: {
-					'build/app.js': ['source/scripts/main.jsx']
+					'build/app.js': ['source/scripts/app/main.jsx']
 				},
 				options: {
 					alias: {
@@ -86,8 +86,15 @@ module.exports = function (grunt) {
 				options: {
 					livereload: true,
 				},
+			},
+			lint: {
+				files: ['source/scripts/app/**'],
+				tasks: ['eslint']
 			}
 		},
+		eslint: {
+			target: ['source/scripts/app/**']
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-browserify');
@@ -95,6 +102,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-eslint');
 	
 	grunt.registerTask('scripts_dev', ['browserify:dev']);
 

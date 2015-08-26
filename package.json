@@ -1,8 +1,8 @@
 {
   "name": "grunt-browserify-es6-react-intro",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An introduction to creating a react component with grunt, browserify and es6 via babel",
-  "author": "Your Name <you.name@example.org>",
+  "author": "Sam Stonehouse",
   "devDependencies": {
     "babelify": "^6.2.0",
     "browserify": "^11.0.1",
@@ -10,6 +10,7 @@
     "grunt-browserify": "^4.0.0",
     "grunt-concurrent": "^2.0.3",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^17.1.0",
     "grunt-react": "^0.12.2",
     "grunt-sass": "^1.0.0",
     "grunt-targethtml": "^0.2.6"
