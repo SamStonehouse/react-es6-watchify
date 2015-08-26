@@ -17,7 +17,7 @@ The default grunt task will build everything
     
 There are two watchers available designed to be run simultaniusly on seperate terminals; one is for Eslint and the other for rebuilding and reloading the page.
 
-    grunt watch:eslint
+    grunt watch:lint
 
     grunt watch-all
 
