@@ -1,11 +1,21 @@
 module.exports = function (grunt) {
 
-	var buildDir = "./build/";
-	var sourceDir = "./source/";
+	var buildDir = "build/";
+	var sourceDir = "source/";
 
-	var scriptSubfolder = "scripts/";
-	var styleSubfolder = "styles/";
-	var assetSubfolder = "assets/";
+	var scriptsSubfolder = "scripts/";
+	var stylesSubfolder = "styles/";
+	var assetsSubfolder = "assets/";
+
+	var scriptsSource = sourceDir + scriptsSubfolder;
+	var stylesSource = sourceDir + stylesSubfolder;
+	var assetsSource = sourceDir + assetsSubfolder;
+
+	var entryScript = "main.js";
+	var bundledScript = "bundle.js";
+
+	var entryStyle = "main.scss";
+	var bundledStyle = "style.css";
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -17,18 +27,19 @@ module.exports = function (grunt) {
 				files:[
 					{
 						expand: true,
-						cwd: 'source',
-						src: ['assets/**/*'],
-						dest: 'build/',
+						cwd: sourceDir,
+						src: [assetsSubfolder + '**/*'],
+						dest: buildDir,
 					},
 				], 
 			},
 		},
 		browserify: {
 			dev: {
-				files: {
-					'build/app.js': ['source/scripts/main.js']
-				},
+				files: [{
+					dest: buildDir + bundledScript,
+					src: [scriptsSource + entryScript],
+				}],
 				options: {
 					transform: [
 						'babelify', 'reactify'
@@ -40,9 +51,10 @@ module.exports = function (grunt) {
 				},
 			},
 			devWatch: {
-				files: {
-					'build/app.js': ['source/scripts/main.js']
-				},
+				files: [{
+					dest: buildDir + bundledScript,
+					src: [scriptsSource + entryScript],
+				}],
 				options: {
 					transform: [
 						'babelify', 'reactify'
@@ -54,18 +66,40 @@ module.exports = function (grunt) {
 					keepAlive: true,
 					watch: true
 				},
+			},
+			prod: {
+				files: [{
+					dest: buildDir + bundledScript,
+					src: [scriptsSource + entryScript]
+				}],
+				options: {
+					transform: [
+						'babelify', 'reactify'
+					],
+					browserifyOptions: {
+						extensions: ['.jsx'],
+					},
+				},
 			}
 		},
 		targethtml: {
 			dev: {
-				files: {
-					'build/index.html': 'source/index.html'
-				}
+				files: [{
+					dest: buildDir + 'index.html',
+					src: sourceDir + 'index.html'
+				}]
+			},
+			devWatch: {
+				files: [{
+					dest: buildDir + 'index.html',
+					src: sourceDir + 'index.html'
+				}]
 			},
 			prod: {
-				files: {
-					'build/index.html': 'source/index.html'
-				}
+				files: [{
+					dest: buildDir + 'index.html',
+					src: sourceDir + 'index.html'
+				}]
 			}
 		},
 		sass: {
@@ -73,27 +107,37 @@ module.exports = function (grunt) {
 				options: {
 					sourceMap: true
 				},
-				files: {
-					'build/style.css': 'source/styles/main.scss'
-				}
+				files: [{
+					dest: buildDir + bundledStyle,
+					src: stylesSource + entryStyle
+				}]
+			},
+			prod: {
+				options: {
+					sourceMap: true
+				},
+				files: [{
+					dest: buildDir + bundledStyle,
+					src: stylesSource + entryStyle
+				}]
 			}
 		},
 		concurrent: {
 			options: {
 				logConcurrentOutput: true,
 			},
-			dev: ['browserify:devWatch', 'watch:html', 'watch:sass', 'watch:livereload'],
+			dev: ['targethtml:devWatch', 'browserify:devWatch', 'watch:html', 'watch:sass', 'watch:livereload'],
 		},
 		watch: {
 			html: {
-				files: ['source/index.html'],
+				files: [ sourceDir + 'index.html'],
 				tasks: ['targethtml:dev'],
 				options: {
 					spawn: false,
 				},
 			},
 			sass: {
-				files: ['source/styles/**'],
+				files: [ stylesSource + '**'],
 				tasks: ['sass:dev'],
 				options: {
 					spawn: false,
@@ -107,12 +151,12 @@ module.exports = function (grunt) {
 				},
 			},
 			lint: {
-				files: ['source/scripts/**'],
+				files: [scriptsSource + '**'],
 				tasks: ['eslint']
 			}
 		},
 		eslint: {
-			target: ['source/scripts/**']
+			target: [scriptsSource + '**/*']
 		}
 	});
 
@@ -126,8 +170,16 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-targethtml');
 	
 	grunt.registerTask('scripts_dev', ['browserify:dev']);
+	grunt.registerTask('scripts_prod', ['browserify:prod']);
+
+	grunt.registerTask('styles_dev', ['sass:dev']);
+	grunt.registerTask('styles_prod', ['sass:prod']);
+
+	grunt.registerTask('views_dev', ['targethtml:dev'])
+	grunt.registerTask('views_prod', ['targethtml:prod'])
 
 	grunt.registerTask('watch-all', ['concurrent:dev'])
 
-	grunt.registerTask('default', ['eslint', 'clean:build', 'copy:assets', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
+	grunt.registerTask('default', ['eslint', 'clean:build', 'copy:assets', 'scripts_dev', 'views_dev', 'styles_dev']);
+	grunt.registerTask('prod', ['eslint', 'clean:build', 'copy:assets', 'scripts_prod', 'views_prod', 'styles_prod']);
 };

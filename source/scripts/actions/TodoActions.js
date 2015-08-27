@@ -9,7 +9,7 @@ class TodoActions {
       'toggleCompleteAll',
       'destroy',
       'destroyCompleted'
-    )
+    );
   }
 }
 

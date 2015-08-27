@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /**
  * This mixin lets you setup your listeners. It is similar to Fluxible's mixin.
  *
@@ -42,40 +42,40 @@
  *   })
  * }
  */
-import Subscribe from './Subscribe'
+import Subscribe from './Subscribe';
 
 var FluxyMixin = {
   componentDidMount: function () {
-    Subscribe.create(this)
+    Subscribe.create(this);
 
-    var stores = this.constructor.storeListeners
+    var stores = this.constructor.storeListeners;
 
     if (Array.isArray(stores)) {
       if (!this.onChange) {
         throw new ReferenceError(
           'onChange should exist in your React component but is not defined'
-        )
+        );
       }
 
       stores.forEach(function (store) {
-        Subscribe.add(this, store, this.onChange)
-      }, this)
+        Subscribe.add(this, store, this.onChange);
+      }, this);
     } else {
       Object.keys(stores).forEach(function (handler) {
         if (!this[handler]) {
           throw new ReferenceError(
             handler + ' does not exist in your React component'
-          )
+          );
         }
 
-        Subscribe.add(this, stores[handler], this[handler])
-      }, this)
+        Subscribe.add(this, stores[handler], this[handler]);
+      }, this);
     }
   },
 
   componentWillUnmount: function () {
-    Subscribe.destroy(this)
+    Subscribe.destroy(this);
   }
-}
+};
 
-module.exports = FluxyMixin
+module.exports = FluxyMixin;
