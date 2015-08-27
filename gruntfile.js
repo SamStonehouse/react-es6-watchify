@@ -6,11 +6,23 @@ module.exports = function (grunt) {
 	var scriptSubfolder = "scripts/";
 	var styleSubfolder = "styles/";
 	var assetSubfolder = "assets/";
-	
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			build: 	["build/"],
+		},
+		copy: {
+			assets: {
+				files:[
+					{
+						expand: true,
+						cwd: 'source',
+						src: ['assets/**/*'],
+						dest: 'build/',
+					},
+				], 
+			},
 		},
 		browserify: {
 			dev: {
@@ -95,26 +107,27 @@ module.exports = function (grunt) {
 				},
 			},
 			lint: {
-				files: ['source/scripts/app/**'],
+				files: ['source/scripts/**'],
 				tasks: ['eslint']
 			}
 		},
 		eslint: {
-			target: ['source/scripts/app/**']
+			target: ['source/scripts/**']
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-browserify');
-	grunt.loadNpmTasks('grunt-targethtml');
-	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-eslint');
+	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-targethtml');
 	
 	grunt.registerTask('scripts_dev', ['browserify:dev']);
 
 	grunt.registerTask('watch-all', ['concurrent:dev'])
 
-	grunt.registerTask('default', ['eslint', 'clean:build', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
+	grunt.registerTask('default', ['eslint', 'clean:build', 'copy:assets', 'scripts_dev', 'targethtml:dev', 'sass:dev']);
 };
