@@ -76,6 +76,9 @@ module.exports = function (grunt) {
 					transform: [
 						'babelify', 'reactify'
 					],
+					plugin: [
+						['minifyify', { map: false } ],
+					],
 					browserifyOptions: {
 						extensions: ['.jsx'],
 					},
@@ -92,7 +95,7 @@ module.exports = function (grunt) {
 			devWatch: {
 				files: [{
 					dest: buildDir + 'index.html',
-					src: sourceDir + 'index.html'
+					src: sourceDir + 'index.html',
 				}]
 			},
 			prod: {
@@ -114,7 +117,8 @@ module.exports = function (grunt) {
 			},
 			prod: {
 				options: {
-					sourceMap: false
+					sourceMap: false,
+					outputStyle: 'compressed',
 				},
 				files: [{
 					dest: buildDir + bundledStyle,
