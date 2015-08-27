@@ -27,6 +27,6 @@ There are two watchers available designed to be run simultaniusly on seperate te
 
 ## Project Structure
 
-Project structure is faily simple, all source files are inside source, with scripts and styles having their own folders. Scripts is again split up into app and libs.
+Project structure is faily simple, all source files are inside source, with scripts and styles having their own folders.
 
 The built project is put into the build directory and not commited.

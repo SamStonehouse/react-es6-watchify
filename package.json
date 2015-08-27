@@ -1,7 +1,7 @@
 {
-  "name": "grunt-browserify-es6-react-intro",
-  "version": "0.0.2",
-  "description": "An introduction to creating a react component with grunt, browserify and es6 via babel",
+  "name": "grunt-browserify-es6-react-flux-intro",
+  "version": "0.0.3",
+  "description": "An introduction to creating a react and flux application with alt, grunt, browserify and es6 via babel",
   "author": "Sam Stonehouse",
   "devDependencies": {
     "babelify": "^6.2.0",

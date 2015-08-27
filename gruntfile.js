@@ -1,4 +1,12 @@
 module.exports = function (grunt) {
+
+	var buildDir = "./build/";
+	var sourceDir = "./source/";
+
+	var scriptSubfolder = "scripts/";
+	var styleSubfolder = "styles/";
+	var assetSubfolder = "assets/";
+	
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
@@ -7,7 +15,7 @@ module.exports = function (grunt) {
 		browserify: {
 			dev: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.js']
+					'build/app.js': ['source/scripts/main.js']
 				},
 				options: {
 					transform: [
@@ -21,7 +29,7 @@ module.exports = function (grunt) {
 			},
 			devWatch: {
 				files: {
-					'build/app.js': ['source/scripts/app/main.js']
+					'build/app.js': ['source/scripts/main.js']
 				},
 				options: {
 					transform: [
