@@ -114,7 +114,7 @@ module.exports = function (grunt) {
 			},
 			prod: {
 				options: {
-					sourceMap: true
+					sourceMap: false
 				},
 				files: [{
 					dest: buildDir + bundledStyle,
