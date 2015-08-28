@@ -135,7 +135,7 @@ module.exports = function (grunt) {
 		watch: {
 			html: {
 				files: [ sourceDir + 'index.html'],
-				tasks: ['targethtml:dev'],
+				tasks: ['targethtml:devWatch'],
 				options: {
 					spawn: false,
 				},

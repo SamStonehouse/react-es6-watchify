@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "alt": "^0.17.1",
+    "d3": "^3.5.6",
     "object-assign": "^4.0.1",
     "react": "^0.13.3"
   }
