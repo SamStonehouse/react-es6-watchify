@@ -11,10 +11,16 @@ d3Chart.create = function(el, props, state) {
 	svg.append('g')
 		.attr('class', 'd3-points');
 
+	var g = d3.select(el).selectAll('.d3-points');
+
+	g.append("path")
+		.attr("class", "line");
+
 	this.update(el, state);
 };
 
 d3Chart.update = function(el, state) {
+	console.log(state.domain);
 	var scales = this._scales(el, state.domain);
 	this._drawPoints(el, scales, state.data);
 };
@@ -26,17 +32,20 @@ d3Chart.destroy = function(el) {
 d3Chart._drawPoints = function(el, scales, data) {
 	var g = d3.select(el).selectAll('.d3-points');
 
-	var point = g.selectAll('.d3-point')
-		.data(data, function(d) { return d.id; });
+	var line = d3.svg.line()
+		.x(function(d) { return d.index; })
+		.y(function(d) { return d.val; });
 
-	point.enter().append('circle')
-		.attr('class', 'd3-point');
+	data.forEach(function(d, i) {
+		d.index = i * 10;
+		d.val = +d.val;
+	});
 
-	point.attr('cx', function(d) { return scales.x(d.x); })
-		.attr('cy', function(d) { return scales.y(d.y); })
-		.attr('r', function(d) { return scales.z(d.z); });
+	var lineElm = g.select(".line");
 
-	point.exit().remove();
+	lineElm.datum(data)
+		.attr("class", "line")
+		.attr("d", line(data));
 };
 
 d3Chart._scales = function(el, domain) {

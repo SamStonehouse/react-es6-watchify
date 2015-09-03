@@ -28,7 +28,7 @@ var Chart = React.createClass({
 	getChartState: function() {
 		return {
 			data: ChartStore.getState().chartData,
-			domain: { x: [0, 30], y: [0, 100]}
+			domain: { x: [0, ChartStore.getState().chartData.length ], y: [0, 100]}
 		};
 	},
 
