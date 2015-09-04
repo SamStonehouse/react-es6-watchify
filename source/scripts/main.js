@@ -1,12 +1,3 @@
-// import TodoApp from './components/TodoApp.react';
-// import React from 'react';
-
-// React.render(
-//   React.createElement(TodoApp, {}),
-//   document.getElementById('todoapp')
-// );
-
-//import Chart from './components/chart';
 import React from 'react';
 
 //import ChartStore from './stores/ChartStore';

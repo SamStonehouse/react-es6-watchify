@@ -10,7 +10,12 @@ class EvePricesApi {
 	}
 
 	getPrices(type) {
+		var reqPromise = new Promise(function(resolve, reject) {
+		
+			
+		});
 
+		return reqPromise;
 	}
 
 }

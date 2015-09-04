@@ -13,6 +13,14 @@ class EvePriceStore {
 
 	onEveTypeChange(type) {
 		this.type = type;
+
+		if (this.priceDataCache.hasOwnProperty(type)) {
+			this.priceData = this.priceDataCache[type];
+		} else {
+			this.priceData = 'LOADING';
+
+			
+		}
 	}
 
 }
