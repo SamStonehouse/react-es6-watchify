@@ -137,14 +137,14 @@ module.exports = function (grunt) {
 				files: [ sourceDir + 'index.html'],
 				tasks: ['targethtml:devWatch'],
 				options: {
-					spawn: false,
+					spawn: true,
 				},
 			},
 			sass: {
 				files: [ stylesSource + '**'],
 				tasks: ['sass:dev'],
 				options: {
-					spawn: false,
+					spawn: true,
 				},
 			},
 			livereload: {

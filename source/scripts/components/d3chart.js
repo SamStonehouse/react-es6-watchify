@@ -20,7 +20,6 @@ d3Chart.create = function(el, props, state) {
 };
 
 d3Chart.update = function(el, state) {
-	console.log(state.domain);
 	var scales = this._scales(el, state.domain);
 	this._drawPoints(el, scales, state.data);
 };
@@ -33,11 +32,11 @@ d3Chart._drawPoints = function(el, scales, data) {
 	var g = d3.select(el).selectAll('.d3-points');
 
 	var line = d3.svg.line()
-		.x(function(d) { return d.index; })
+		.x(function(d) { return scales.x(d.index); })
 		.y(function(d) { return d.val; });
 
 	data.forEach(function(d, i) {
-		d.index = i * 10;
+		d.index = i;
 		d.val = +d.val;
 	});
 
