@@ -1,5 +1,6 @@
 import alt from '../alt';
 import EveChartActions from '../actions/EveChartActions';
+import evePriceAPI from '../api/eve-prices';
 
 class EvePriceStore {
 
@@ -18,8 +19,18 @@ class EvePriceStore {
 			this.priceData = this.priceDataCache[type];
 		} else {
 			this.priceData = 'LOADING';
-
 			
+			var pricePromise = evePriceAPI.getPrices();
+
+			pricePromise.then((response) => {
+				this.priceDataCache[type] = response.data;
+				this.priceData = response.data;
+				console.log("Data loaded for type");
+			});
+
+			pricePromise.catch(() => {
+				console.log("ErrorW");
+			});
 		}
 	}
 
