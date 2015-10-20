@@ -1,10 +1,11 @@
-import Chart from './components/chart';
 import React from 'react';
 
-import ChartStore from './stores/ChartStore';
-import ChartActions from './actions/ChartActions';
+//import ChartStore from './stores/ChartStore';
+//import ChartActions from './actions/ChartActions';
 
-setInterval(function() {
+import EveChart from './components/eve-type-chart';
+
+/*setInterval(function() {
 	var chartData = ChartStore.getState().chartData;
 
 	chartData.shift();
@@ -24,5 +25,5 @@ var App = React.createClass({
 		);
 	}
 });
-
-React.render(React.createElement(App), document.body);
+*/
+React.render(React.createElement(EveChart), document.body);
