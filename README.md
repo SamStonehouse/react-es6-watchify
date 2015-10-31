@@ -2,7 +2,7 @@
 
 Skeleton project for developing new applications with React and Flux (alt) with ES6 and SASS
 
-Browserify, Babel and Grunt are used for lightening fast compilation and livereload on changes with targethtml for dynamic view generation.
+Browserify, Babel and Grunt are used for lightning fast compilation and livereload on changes with targethtml for dynamic view generation.
 
 
 ## Usage
